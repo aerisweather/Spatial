@@ -11,8 +11,8 @@
   "require": {},
   "autoload": {
     "psr-4": {
-      "Aeris\\Spatial": "src/Spatial",
-      "Aeris\\SpatialTest": "test/SpatialTest"
+      "Aeris\\Spatial\\": "src/Spatial",
+      "Aeris\\SpatialTest\\": "test/SpatialTest"
     }
   }
 }
