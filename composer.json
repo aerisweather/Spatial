@@ -1,0 +1,18 @@
+{
+  "name": "aeris/spatial",
+  "description": "Representations of spatial data",
+  "license": "BSD",
+  "authors": [
+    {
+      "name": "Edan Schwartz",
+      "email": "edanschwartz@gmail.com"
+    }
+  ],
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "Aeris\\Spatial": "src/Spatial",
+      "Aeris\\SpatialTest": "test/SpatialTest"
+    }
+  }
+}
