@@ -30,34 +30,25 @@ $geoJson = json_encode([
   'type' => 'Polygon',
   'coordinates' => [
     [
-      [100, 0],    // E-A
-      [101, 0],    // E-B
-      [101, 1],    // E-C
-      [100, 1],    // E-D
-      [100, 0],    // E-E
+      [100, 0],
+      [101, 0],
+      [101, 1],
+      [100, 1],
+      [100, 0],
     ]
   ]
 ]);
 $wkt = GeometryConverter::geoJsonToWkt($geoJson);
 
 $this->assertEquals(
-  'POLYGON(' .
-    // exterior
-    '(' .
-      '100 0,' .  // E-A
-      '101 0,' .  // E-B
-      '101 1,' .  // E-C
-      '100 1,' .  // E-D
-      '100 0' .  // E-E
-    ')' .
-  ')',
+  'POLYGON((100 0,101 0,101 1,100 1,100 0))',
   $wkt
 );
 ```
 
 ## Geometry
 
-`Geometry` components are object representations of spatial data structures. Objects implementing `\Aeris\Spatial\Geometry\ConvertibleGeometryInterface` may be easily converted between array and WKT (string) formats.
+`Geometry` components are object representations of spatial data structures. Objects implementing `\Aeris\Spatial\Geometry\ConvertibleGeometryInterface` may be easily converted between array and WKT (string) formats using the `FromArray(array $data)` and `toWkt()` methods
 
 Some `Geometry` components may implement additional conversion methods. For example, `\Aeris\Spatial\Geometry\MultiPolygon` implements a `FromFeatureCollection()` method, which makes it easy to convert a GeoJson feature collection to a `MultiPolygon` object.
 
