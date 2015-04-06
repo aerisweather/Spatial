@@ -6,7 +6,7 @@ Representations of spatial data.
 # Installation
 
 ```
-composer require aeris-spatial
+composer require aeris/spatial
 ```
 
 
