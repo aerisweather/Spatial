@@ -4,6 +4,8 @@
 namespace Aeris\Spatial\Geometry;
 
 
+use Aeris\Spatial\Util;
+
 class MultiPolygon implements ConvertibleGeometryInterface {
 	const WKT_ID = 'MULTIPOLYGON';
 
@@ -17,12 +19,32 @@ class MultiPolygon implements ConvertibleGeometryInterface {
 		$this->polygons = $polygons;
 	}
 
-	/** @return Polygon */
+	/**
+	 * @param array $multiPolygonData
+	 * @return static
+	 */
 	public static function FromArray(array $multiPolygonData) {
 		$polygons = array_map(function(array $polygonData) {
 			return Polygon::FromArray($polygonData);
 		}, $multiPolygonData);
 
+		return new static($polygons);
+	}
+
+	/**
+	 * From Coordinates (with buffer)
+	 *
+	 * Creates a MultiPolygon from supplied
+	 * @param Coordinate[] $coordinates
+	 * @param float $buffer The radius in KM of how large of a buffer to put around each point
+	 * @param float $projectionRadius Spherical projection in KM
+	 * @return static
+	 */
+	public static function FromCoordinatesWithBuffer(array $coordinates, $buffer, $projectionRadius = Util::EARTH_RADIUS) {
+		$polygons = array_map(
+			function ($coordinate) use ($buffer, $projectionRadius) {
+				return Polygon::FromCoordinateWithBufferBb($coordinate, $buffer, $projectionRadius);
+			}, $coordinates);
 		return new static($polygons);
 	}
 

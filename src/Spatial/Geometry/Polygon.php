@@ -2,6 +2,7 @@
 
 
 namespace Aeris\Spatial\Geometry;
+use Aeris\Spatial\Util;
 
 
 /**
@@ -31,6 +32,38 @@ class Polygon implements ConvertibleGeometryInterface {
 			LineRing::FromArray($exterior),
 			($hasInterior ? LineRing::FromArray($interior) : null)
 		);
+	}
+
+	/**
+	 * From Coordinate With Buffer Bounding Box
+	 *
+	 * Creates a Minimum Bounding Rectangle / Bounding Box for a the supplied `coordinate`, ensuring that the bounding
+	 * box covers `radius`
+	 *
+	 * @param Coordinate $coordinate
+	 * @param float $radius The radius in KM of how large of a buffer to put around each point
+	 * @param float $projectionRadius Spherical projection in KM
+	 * @return static
+	 */
+	public static function FromCoordinateWithBufferBb(Coordinate $coordinate, $radius, $projectionRadius = Util::EARTH_RADIUS) {
+		//Latitudes
+		$maxLat = $coordinate->getLat() + rad2deg($radius / $projectionRadius);
+		$minLat = $coordinate->getLat() - rad2deg($radius / $projectionRadius);
+		//Longitudes
+		$maxLon = $coordinate->getLon() + rad2deg($radius / $projectionRadius / cos(deg2rad($coordinate->getLat())));
+		$minLon = $coordinate->getLon() - rad2deg($radius / $projectionRadius / cos(deg2rad($coordinate->getLat())));
+
+		//Start with the NE corner on around, like CSS?
+		$bbLineRing = new LineRing(
+			[
+				new Coordinate($maxLon, $maxLat),
+				new Coordinate($maxLon, $minLat),
+				new Coordinate($minLon, $minLat),
+				new Coordinate($minLon, $maxLat),
+				new Coordinate($maxLon, $maxLat)
+			]
+		);
+		return new static($bbLineRing);
 	}
 
 	/**
