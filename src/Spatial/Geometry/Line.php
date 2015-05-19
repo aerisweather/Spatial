@@ -20,7 +20,7 @@ class Line implements ConvertibleGeometryInterface {
 	}
 
 	/**
-	 * @param array[] $coordinates Array of [lat:number, lon:number]
+	 * @param array[] $coordinates Array of [lon:number, lat:number]
 	 * @return LineRing
 	 */
 	public static function FromArray(array $coordinates) {

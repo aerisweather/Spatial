@@ -9,42 +9,28 @@ class Coordinate implements ConvertibleGeometryInterface {
 	const WKT_ID = 'POINT';
 
 	/** @var number */
-	protected $lat;
-	/** @var number */
 	protected $lon;
+	/** @var number */
+	protected $lat;
 
 	/**
 	 * @param number $lat
 	 * @param number $lon
 	 */
-	public function __construct($lat, $lon) {
-		$this->lat = $lat;
+	public function __construct($lon, $lat) {
 		$this->lon = $lon;
+		$this->lat = $lat;
 	}
 
-	public static function FromArray(array $latLon) {
-		return new static($latLon[0], $latLon[1]);
+	public static function FromArray(array $lonLat) {
+		return new static($lonLat[0], $lonLat[1]);
 	}
 
 	public function toWkt($includeId = true) {
 		$wkt = $includeId ? self::WKT_ID : '';
-		$wkt .= join(' ', [$this->lat, $this->lon]);
+		$wkt .= join(' ', [$this->lon, $this->lat]);
 
 		return $wkt;
-	}
-
-	/**
-	 * @return number
-	 */
-	public function getLat() {
-		return $this->lat;
-	}
-
-	/**
-	 * @param number $lat
-	 */
-	public function setLat($lat) {
-		$this->lat = $lat;
 	}
 
 	/**
@@ -62,12 +48,26 @@ class Coordinate implements ConvertibleGeometryInterface {
 	}
 
 	/**
+	 * @return number
+	 */
+	public function getLat() {
+		return $this->lat;
+	}
+
+	/**
+	 * @param number $lat
+	 */
+	public function setLat($lat) {
+		$this->lat = $lat;
+	}
+
+	/**
 	 * @param Coordinate $coordinate
 	 * @return bool
 	 */
 	public function isEqual(Coordinate $coordinate) {
-		return $coordinate->getLat() === $this->getLat() &&
-		$coordinate->getLon() === $this->getLon();
+		return $coordinate->getLon() === $this->getLon() &&
+		$coordinate->getLat() === $this->getLat();
 	}
 
 }
