@@ -4,6 +4,7 @@
 namespace Aeris\SpatialTest\Geometry;
 
 
+use Aeris\Spatial\Geometry\Coordinate;
 use Aeris\Spatial\Geometry\MultiPolygon;
 use Aeris\Spatial\Geometry\Polygon;
 
@@ -243,6 +244,56 @@ class MultiPolygonTest extends \PHPUnit_Framework_TestCase {
 				]
 			])
 		], $mPoly->getPolygons());
+	}
+
+	/** @test */
+	public function FromCoordinatesWithBuffer_simple() {
+		$coordinates = [
+			new Coordinate(5, 5)
+		];
+		$mPoly = MultiPolygon::FromCoordinatesWithBuffer($coordinates, 100);
+		$this->assertEquals([
+				Polygon::FromArray([
+				   [
+					   [5.9027568683526, 5.8993216059187],
+					   [5.9027568683526, 4.1006783940813],
+					   [4.0972431316474, 4.1006783940813],
+					   [4.0972431316474, 5.8993216059187],
+					   [5.9027568683526, 5.8993216059187]
+				   ]
+				])
+			],
+			$mPoly->getPolygons());
+	}
+
+	/** @test */
+	public function FromCoordinatesWithBuffer_multiCoord() {
+		$coordinates = [
+			new Coordinate(0, 0),
+			new Coordinate(5, 5)
+		];
+		$mPoly = MultiPolygon::FromCoordinatesWithBuffer($coordinates, 100);
+		$this->assertEquals([
+			Polygon::FromArray([
+				   [
+					   [0.89932160591873, 0.89932160591873],
+					   [0.89932160591873, -0.89932160591873],
+					   [-0.89932160591873, -0.89932160591873],
+					   [-0.89932160591873, 0.89932160591873],
+					   [0.89932160591873, 0.89932160591873]
+				   ]
+				]),
+			Polygon::FromArray([
+				   [
+					   [5.9027568683526, 5.8993216059187],
+					   [5.9027568683526, 4.1006783940813],
+					   [4.0972431316474, 4.1006783940813],
+					   [4.0972431316474, 5.8993216059187],
+					   [5.9027568683526, 5.8993216059187]
+				   ]
+			   ])
+			],
+			$mPoly->getPolygons());
 	}
 
 }
