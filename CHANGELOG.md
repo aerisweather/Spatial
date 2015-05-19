@@ -1,3 +1,9 @@
+# 1.1.0
+
+* ADD: MultiPolygon::FromCoordinatesWithBuffer - Creates bounding boxes around each passed Coordinate and returns them
+       in a MultiPolygon container.
+* ADD: Polygon::FromCoordinateWithBufferBb - Creates a bounding box around the passed Coordinate and returns a Polygon.
+
 # 1.0.1
 
 * FIX: Coordinate lon/lat was reversed. 
