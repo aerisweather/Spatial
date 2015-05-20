@@ -1,3 +1,7 @@
+# 1.2.0
+
+* ADD: Distance calculation for two coordinates.
+
 # 1.1.0
 
 * ADD: MultiPolygon::FromCoordinatesWithBuffer - Creates bounding boxes around each passed Coordinate and returns them
