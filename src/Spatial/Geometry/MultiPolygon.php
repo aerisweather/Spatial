@@ -37,7 +37,7 @@ class MultiPolygon implements ConvertibleGeometryInterface {
 	 * Creates a MultiPolygon from supplied
 	 * @param Coordinate[] $coordinates
 	 * @param float $buffer The radius in KM of how large of a buffer to put around each point
-	 * @param float $projectionRadius Spherical projection in KM
+	 * @param float $projectionRadius Spherical projection in KM, defaults to Earth's radius
 	 * @return static
 	 */
 	public static function FromCoordinatesWithBuffer(array $coordinates, $buffer, $projectionRadius = Util::EARTH_RADIUS) {

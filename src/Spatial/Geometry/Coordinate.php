@@ -4,7 +4,10 @@
 namespace Aeris\Spatial\Geometry;
 
 
-class Coordinate implements ConvertibleGeometryInterface {
+use Aeris\Spatial\Util;
+
+class Coordinate implements ConvertibleGeometryInterface
+{
 
 	const WKT_ID = 'POINT';
 
@@ -68,6 +71,32 @@ class Coordinate implements ConvertibleGeometryInterface {
 	public function isEqual(Coordinate $coordinate) {
 		return $coordinate->getLon() === $this->getLon() &&
 		$coordinate->getLat() === $this->getLat();
+	}
+
+	/**
+	 * Distance
+	 *
+	 * Get the distance (in KM) from this point to another. This formula is derrived from a site NOAA linked to from their
+	 * website.
+	 *
+	 * @see http://www.nhc.noaa.gov/gccalc.shtml
+	 * @see http://williams.best.vwh.net/avform.htm#Intro
+	 * @param Coordinate $otherCoordinate
+	 * @param float $projectionRadius Spherical projection in KM, defaults to Earth's radius
+	 * @return float
+	 */
+	public function getDistance(Coordinate $otherCoordinate, $projectionRadius = Util::EARTH_RADIUS) {
+		$latFrom = deg2rad($this->getLat());
+		$lonFrom = deg2rad($this->getLon());
+		$latTo   = deg2rad($otherCoordinate->getLat());
+		$lonTo   = deg2rad($otherCoordinate->getLon());
+
+		$latDelta = $latTo - $latFrom;
+		$lonDelta = $lonTo - $lonFrom;
+
+		$angle = 2 * asin(sqrt(pow(sin($latDelta / 2), 2) +
+							   cos($latFrom) * cos($latTo) * pow(sin($lonDelta / 2), 2)));
+		return $angle * $projectionRadius;
 	}
 
 }

@@ -42,7 +42,7 @@ class Polygon implements ConvertibleGeometryInterface {
 	 *
 	 * @param Coordinate $coordinate
 	 * @param float $radius The radius in KM of how large of a buffer to put around each point
-	 * @param float $projectionRadius Spherical projection in KM
+	 * @param float $projectionRadius Spherical projection in KM, defaults to Earth's radius
 	 * @return static
 	 */
 	public static function FromCoordinateWithBufferBb(Coordinate $coordinate, $radius, $projectionRadius = Util::EARTH_RADIUS) {
