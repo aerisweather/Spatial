@@ -55,10 +55,6 @@ function compassDirection(Coordinate $coordA, Coordinate $coordB) {
 	];
 	$bearing = bearing($coordA, $coordB);
 
-	while ($bearing < 0) {
-		$bearing += 360;
-	}
-
 	$bearingIndex = round($bearing / 22.5) - 1;
 	return $directions[$bearingIndex];
 }
