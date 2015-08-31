@@ -1,7 +1,6 @@
 {
   "name": "aeris/spatial",
   "description": "Representations of spatial data",
-  "version": "1.2.0",
   "license": "BSD",
   "authors": [
     {
