@@ -19,6 +19,11 @@ class UtilTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	/** @test */
+	public function bearingTest_sameLocation() {
+		$this->assertEquals(0, Util\bearing(new Coordinate(45, -90), new Coordinate(45, -90)));
+	}
+
+	/** @test */
 	public function compassDirectionTest() {
 		$mplsDowntown = new Coordinate(-93.26491355895996, 44.97591021304562);
 
@@ -33,6 +38,11 @@ class UtilTest extends \PHPUnit_Framework_TestCase {
 		$edenPrairie = new Coordinate(-93.4768295288086, 44.85148787683413);
 		$this->assertEquals('SW', Util\compassDirection($mplsDowntown, $edenPrairie));
 		$this->assertEquals('NE', Util\compassDirection($edenPrairie, $mplsDowntown));
+	}
+
+	/** @test */
+	public function compassDirectionTest_sameLocation() {
+		$this->assertEquals('N', Util\compassDirection(new Coordinate(45, -90), new Coordinate(45, -90)));
 	}
 
 }
