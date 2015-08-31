@@ -1,3 +1,7 @@
+# 1.3.1
+
+* FIX: Util\compassDirection for `$bearing=0`
+
 # 1.3.0
 
 * ADD: New utility methods: `Util\bearing`, `Util\compassDirection`
