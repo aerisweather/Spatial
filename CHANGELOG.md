@@ -1,3 +1,8 @@
+# 1.3.0
+
+* ADD: New utility methods: `Util\bearing`, `Util\compassDirection`
+
+
 # 1.2.0
 
 * ADD: Distance calculation for two coordinates.
