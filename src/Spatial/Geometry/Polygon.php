@@ -45,7 +45,7 @@ class Polygon implements ConvertibleGeometryInterface {
 	 * @param float $projectionRadius Spherical projection in KM, defaults to Earth's radius
 	 * @return static
 	 */
-	public static function FromCoordinateWithBufferBb(Coordinate $coordinate, $radius, $projectionRadius = Util::EARTH_RADIUS) {
+	public static function FromCoordinateWithBufferBb(Coordinate $coordinate, $radius, $projectionRadius = Util\EARTH_RADIUS) {
 		//Latitudes
 		$maxLat = $coordinate->getLat() + rad2deg($radius / $projectionRadius);
 		$minLat = $coordinate->getLat() - rad2deg($radius / $projectionRadius);

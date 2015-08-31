@@ -124,3 +124,52 @@ You could then use the MultiPolygon object to execute a MySql spatial query:
 $myQuery = 'SELECT * FROM `places` ' .
  'WHERE ST_CONTAINS(GeomFromText(' . $mPoly->toWKT() . '), `places`.`point`)' 
 ```
+
+
+## Util
+
+The `Aeris\Spatial\Util` namespace contains some utility function for working with spatial components.
+
+### `Util\bearing`
+
+Returns the direction (in degrees) between two coordinates.
+
+```php
+$minneapolis = new Coordinate(-93.251953125, 44.9336963896947);
+$chicago = new Coordinate(-87.71484375, 41.80407814427237);
+
+Util\bearing($minneapolis, $chicago); // 125.93766052151
+Util\bearing($chicago, $minneapolis); // 309.74293632484
+```
+
+
+### `Util\compassDirection`
+
+Returns the compass rose direction between two coordinates.
+
+```php
+$minneapolis = new Coordinate(-93.251953125, 44.9336963896947);
+$edenPrarie = new Coordinate(-93.4768295288086, 44.85148787683413);
+
+Util\compassDirection($minneapolis, $edenPrarie); // 'SW'
+Util\compassDirection($edenPrarie, $minneapolis); // 'NE'
+```
+
+Possible return values:
+
+* NNE
+* NE
+* ENE
+* E
+* ESE
+* SE
+* SSE
+* S
+* SSW
+* SW
+* WSW
+* W
+* WNW
+* NW
+* NNW
+* N

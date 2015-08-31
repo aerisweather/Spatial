@@ -85,7 +85,7 @@ class Coordinate implements ConvertibleGeometryInterface
 	 * @param float $projectionRadius Spherical projection in KM, defaults to Earth's radius
 	 * @return float
 	 */
-	public function getDistance(Coordinate $otherCoordinate, $projectionRadius = Util::EARTH_RADIUS) {
+	public function getDistance(Coordinate $otherCoordinate, $projectionRadius = Util\EARTH_RADIUS) {
 		$latFrom = deg2rad($this->getLat());
 		$lonFrom = deg2rad($this->getLon());
 		$latTo   = deg2rad($otherCoordinate->getLat());

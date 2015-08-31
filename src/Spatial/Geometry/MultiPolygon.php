@@ -40,7 +40,7 @@ class MultiPolygon implements ConvertibleGeometryInterface {
 	 * @param float $projectionRadius Spherical projection in KM, defaults to Earth's radius
 	 * @return static
 	 */
-	public static function FromCoordinatesWithBuffer(array $coordinates, $buffer, $projectionRadius = Util::EARTH_RADIUS) {
+	public static function FromCoordinatesWithBuffer(array $coordinates, $buffer, $projectionRadius = Util\EARTH_RADIUS) {
 		$polygons = array_map(
 			function ($coordinate) use ($buffer, $projectionRadius) {
 				return Polygon::FromCoordinateWithBufferBb($coordinate, $buffer, $projectionRadius);
